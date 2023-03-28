@@ -1,0 +1,127 @@
+:root {
+    --btn-font-size: var(--text-sm);
+    --btn-padding-x: var(--space-md);
+    --btn-padding-y: var(--space-xs);
+    --btn-radius: 2em;
+}
+
+.btn {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-weight: 400;
+    text-decoration: none;
+    line-height: 1.2;
+    @include fontSmooth;
+    box-shadow: none;
+    transition: all 0.2s ease;
+    will-change: transform;
+
+    &:hover {
+        background: var(--color-accent-darker);
+        box-shadow: var(--shadow-sm);
+    }
+
+    &:focus {
+        box-shadow: 0px 0px 0px 2px alpha(var(--color-contrast-higher), 0.15);
+        outline: none;
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+}
+
+// themes
+.btn--primary {
+    background: var(--color-accent);
+    color: var(--color-white);
+
+    &:hover {
+        background: var(--color-accent-darker);
+    }
+
+    &:focus {
+        box-shadow: 0px 0px 0px 2px alpha(var(--color-primary), 0.2);
+    }
+}
+
+.btn--subtle {
+    background: alpha(var(--color-bg), 0);
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    font-weight: 500;
+
+    &:hover {
+        background: var(--color-accent);
+        color: var(--color-bg);
+    }
+}
+
+.btn--accent {
+    background: var(--color-secondary-dark);
+    color: var(--color-white);
+
+    &:hover {
+        background: var(--color-secondary-darker);
+    }
+
+    &:focus {
+        box-shadow: 0px 0px 0px 2px alpha(var(--color-accent), 0.2);
+    }
+}
+
+.btn--white-square {
+    background: transparent;
+    color: var(--color-white);
+    border-radius: 0;
+    border: 2px solid var(--color-white);
+
+    &:hover {
+        background: var(--color-white);
+        color: var(--color-accent);
+    }
+}
+
+.btn--black {
+    background: transparent;
+    color: var(--color-black);
+    border: 2px solid var(--color-black);
+
+    &:hover {
+        background: var(--color-black);
+        color: var(--color-white);
+    }
+}
+
+.btn--white {
+    background: transparent;
+    border: 2px solid var(--color-white);
+
+    &:hover {
+        background: var(--color-white);
+        color: var(--color-accent);
+    }
+}
+
+// feedback
+.btn--disabled, .btn[disabled], .btn[readonly] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+// size
+.btn--sm {
+    padding-top: var(--space-xxs);
+    padding-bottom: var(--space-xxs);
+    font-size: 0.7em;
+}
+
+.btn--md {
+    font-size: 1em;
+}
+
+.btn--lg {
+    font-size: 1.2em;
+}

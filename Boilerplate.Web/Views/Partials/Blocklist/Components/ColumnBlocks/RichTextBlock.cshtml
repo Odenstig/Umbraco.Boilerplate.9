@@ -1,0 +1,11 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+
+@{
+    var content = (RichTextBlock)Model.Content;
+}
+
+<section class="text-component">
+    @Html.Raw(content.Rte)
+</section>
+

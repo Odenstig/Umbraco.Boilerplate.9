@@ -1,0 +1,24 @@
+﻿<link rel="stylesheet" href="https://use.typekit.net/btq0gna.css">
+
+<script>
+    function loadScript(src) {
+        var js = document.createElement('script');
+        js.src = src;
+        document.head.appendChild(js);
+    }
+</script>
+
+<link rel="stylesheet" id="codyframe" href="~/css/style.css" />
+
+<!-- browsers not supporting CSS variables (e.g IE 11) -->
+<script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+        var cfStyle = document.getElementById('codyframe');
+        if (cfStyle) {
+            var href = cfStyle.getAttribute('href');
+            href = href.replace('style.css', 'style-fallback.css');
+            cfStyle.setAttribute('href', href);
+        }
+        loadScript("https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js")
+    }
+</script>

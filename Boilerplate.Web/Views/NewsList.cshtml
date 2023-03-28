@@ -1,0 +1,73 @@
+﻿@using Boilerplate.Core.Models.ViewModels
+@using Boilerplate.Core.Components.Common.Hero
+@inherits UmbracoViewPage<Boilerplate.Core.Models.ViewModels.NewsListPageViewModel>
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@(await Component.InvokeAsync(typeof(HeroViewComponent), Model))
+
+<article class="news-list padding-y-lg">
+
+    @if (Model.HasAnyNews)
+    {
+        <section class="container grid gap-sm max-width-lg">
+            <div class="col-12 col-7@md">
+                @(await Component.InvokeAsync(typeof(ImageViewComponent), new ImageMediaRequest {
+                    Image = Model.LatestNewsItem.ShareImage,
+                    IsLazy = true,
+                    Crops = new ImageRequestCrops { Height = 520, Width = 800 },
+                    ObjectFit = ObjectFitType.Cover
+                }))
+            </div>
+
+            <div class="col-12 col-5@md flex flex-column justify-center">
+                <div class="text-component">
+                    <p class="color-blue-grey">@Model.LatestNewsItem.DisplayDate.ToPrettyDateString(Model.Culture)</p>
+                    <a class="text-decoration-none color-black" href="@Model.LatestNewsItem.Url()">
+                        <h3>@Model.LatestNewsItem.Name</h3>
+                    </a>
+                    <p>@Model.LatestNewsItem.MetaDescription.Truncate(Constants.General.TruncateDefaultLength)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container max-width-md grid gap-md margin-top-lg">
+            <div>
+                <h2 class="margin-bottom-lg margin-bottom-md@md">@Model.LatestNewsTitle</h2>
+                <div class="news-list__news grid gap-md gap-lg@sm gap-sm@md"
+                     data-newsList="@Model.Id"
+                     data-take="4"
+                     data-skip="@Model.InitalLoadAmount"
+                     data-culture="@Model.Culture">
+
+                    @await Html.PartialAsync("_NewsItems", new NewsItemsPartialViewModel
+                    {
+                        NewsItems = Model.LatestNewsSkipLatest,
+                        UseFourColumnLayout = true,
+                        UseImageLazyLoad = true
+                    })
+
+                </div>
+            </div>
+
+            @if (Model.CanLoadMore)
+            {
+                <div class="news-list__load-more flex justify-center">
+                    <button class="news-list__load-more-btn btn btn--subtle">
+                        @Model.LoadMoreText
+                    </button>
+                    <div class="news-list__load-more-loader flex justify-center">
+                        @await Html.PartialAsync("_CircleLoader")
+                    </div>
+                </div>
+            }
+        </section>
+
+        <section>
+            @Html.GetBlockListHtml(Model.ValueFor(m => m.Blocklist, fallback: Fallback.ToLanguage))
+        </section>
+    }
+
+</article>

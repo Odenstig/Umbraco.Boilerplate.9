@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <DefaultItemExcludes>$(DefaultItemExcludes);App_Plugins/**;</DefaultItemExcludes>
+        <DefaultItemExcludes>$(DefaultItemExcludes);umbraco/**;</DefaultItemExcludes>
+        <DefaultItemExcludes>$(DefaultItemExcludes);wwwroot/media/**;</DefaultItemExcludes>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Umbraco.Cms" Version="9.1.0" />
+        <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.1.0" />
+        <PackageReference Include="Umbraco.SqlServerCE" Version="4.0.0.1" />
+        <PackageReference Include="uSync" Version="9.0.4" />
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+        <Content Include="App_Plugins/**" CopyToOutputDirectory="Always" />
+        <Content Include="umbraco/**" CopyToOutputDirectory="Always" />
+        <Compile Remove="Models\**" />
+        <Compile Remove="wwwroot\assets\**" />
+        <Content Remove="Models\**" />
+        <Content Remove="umbraco/Data/**" />
+        <Content Remove="umbraco/Logs/**" />
+        <Content Remove="umbraco/mediacache/**" />
+        <Content Remove="wwwroot\assets\**" />
+        <EmbeddedResource Remove="Models\**" />
+        <EmbeddedResource Remove="wwwroot\assets\**" />
+        <None Remove="Models\**" />
+        <None Remove="wwwroot\assets\**" />
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+      <Content Include="umbraco\Data\TEMP\DistCache\74a8975e7af87ac55974cd706e7d7dbb4c5c8596-lastsynced.txt" />
+      <Content Include="umbraco\Data\TEMP\MediaCache\c\6\f\e\0\5\3\2\c6fe0532.jpg" />
+      <Content Include="wwwroot\media\wv4pz3ke\12-meny-1x.jpg" />
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\ExternalIndex\segments.gen" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\ExternalIndex\segments_4" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\ExternalIndex\write.lock" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\InternalIndex\segments.gen" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\InternalIndex\segments_3" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\InternalIndex\write.lock" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\InternalIndex\_1.cfe" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\InternalIndex\_1.cfs" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\InternalIndex\_1.si" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\MembersIndex\segments.gen" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\MembersIndex\segments_2" />
+      <None Include="umbraco\Data\TEMP\ExamineIndexes\MembersIndex\write.lock" />
+      <None Include="umbraco\Data\TEMP\MediaCache\c\6\f\e\0\5\3\2\c6fe0532.meta" />
+      <None Include="umbraco\Data\TEMP\NuCache\NuCache.Content.db" />
+      <None Include="umbraco\Data\TEMP\NuCache\NuCache.Media.db" />
+      <None Include="umbraco\Data\TEMP\TypesCache\umbraco-types.CAMELONTA-MT.hash" />
+      <None Include="umbraco\Data\TEMP\TypesCache\umbraco-types.CAMELONTA-MT.list" />
+      <None Include="umbraco\Data\Umbraco.sdf" />
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+      <Folder Include="umbraco\Data\TEMP\FileUploads\" />
+      <Folder Include="umbraco\Data\TEMP\InMemoryAuto\" />
+      <Folder Include="umbraco\Data\TEMP\Install\" />
+    </ItemGroup>
+
+  <PropertyGroup>
+    <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
+  </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Boilerplate.Core\Boilerplate.Core.csproj" />
+    </ItemGroup>
+
+    <!-- Set this to true if ModelsBuilder mode is not InMemoryAuto-->
+    <PropertyGroup>
+        <RazorCompileOnBuild>true</RazorCompileOnBuild>
+        <RazorCompileOnPublish>true</RazorCompileOnPublish>
+    </PropertyGroup>
+
+</Project>

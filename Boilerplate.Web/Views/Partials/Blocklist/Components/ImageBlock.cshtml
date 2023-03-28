@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+
+@{
+    var content = (ImageBlock)Model.Content;
+    var settings = (ImageBlockSettings)Model.Settings;
+    var backgroundColor = settings?.BackgroundColor;
+    var backgroundStyle = !string.IsNullOrEmpty(backgroundColor) ? "#" + backgroundColor : "initial";
+    var backgroundClass = !string.IsNullOrEmpty(backgroundColor) ? "block--background" : "block--transparent";
+    var imageClasses = UIService.ClassesIf(new ConditionalCssClass { Condition = settings.RoundedCorners, ClassName = "radius-lg overflow-hidden" });
+}
+
+<section class="block block--image position-relative z-index-1 @settings.BlockPaddingClasses() @backgroundClass"
+         style="background-color: @backgroundStyle">
+
+    <div class="container @settings.BlockWidthClasses()">
+        <div class="grid gap-lg items-center">
+
+            @if (content.ImageBlock_image != null)
+            {
+                <div class="@imageClasses">
+                    @(await Component.InvokeAsync(typeof(ImageViewComponent), new ImageMediaRequest {
+                    Image = content.ImageBlock_image,
+                    IsLazy = true,
+                    Quality = 70,
+                    ObjectFit = ObjectFitType.Cover
+                }))
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+
+

@@ -1,0 +1,43 @@
+﻿@using Boilerplate.Core.Models.UtilityModels
+@using Boilerplate.Core.Services
+@model IEnumerable<Boilerplate.Core.Models.DataModels.MenuItem>
+
+<ul class="f-header__list f-header__main-list flex-grow flex-basis-0 justify-center@md order-2">
+
+    @foreach (var navItem in Model)
+    {
+        var navItemClasses = UIService.ClassesIf(
+            new ConditionalCssClass { Condition = navItem.IsCurrentPage, ClassName = "f-header__item--active" });
+
+        <li data-id="@navItem.Id" class="f-header__item @navItemClasses">
+            <a href="@navItem.Url" class="f-header__link js-tab-focus" itemprop="url" title="@navItem.Name">
+                <span class="text-md" itemprop="name">@navItem.Name</span>
+
+                @if (navItem.HasChildren)
+                {
+                    <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 8 4">
+                        <path d="M1.334.667 4 3.334 6.667.667" stroke="#FFF" fill="#ccc" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="nav-sub-expander toggle"></span>
+                }
+            </a>
+
+            @if (navItem.HasChildren)
+            {
+                <ul class="f-header__dropdown">
+                    @foreach (var child in navItem.Children)
+                    {
+                        var navChildItemClasses = UIService.ClassesIf(
+                            new ConditionalCssClass { Condition = child.IsCurrentPage, ClassName = "f-header__item--active" });
+
+                        <li class="@navChildItemClasses">
+                            <a href="@child.Url" class="f-header__dropdown-link">
+                                @child.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+        </li>
+    }
+</ul>

@@ -1,0 +1,34 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+
+@{
+    var content = (ImageLinksBlock)Model.Content;
+    var settings = (BlockSimpleSettings)Model.Settings;
+}
+
+<section class="block block--image-links position-relative z-index-1 @settings.BlockPaddingClasses()">
+    <div class="container @settings.BlockWidthClasses()">
+        <div class="grid gap-md">
+            <h3 class="text-center">@content.Title</h3>
+            <div class="grid gap-sm flex flex-wrap justify-center">
+
+                @foreach (var item in content.ImageLinks)
+                {
+                    var partner = (ImageLink)item.Content;
+
+                    <div class="col-12 col-6@xs col-content@sm flex justify-center">
+                        <div class="width-xxxl">
+                            @(await Component.InvokeAsync(typeof(ImageViewComponent), new ImageMediaRequest {
+                            Image = partner.Image,
+                            IsLazy = true,
+                            ImageFormat = "png",
+                            ObjectFit = ObjectFitType.Contain
+                            }))
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

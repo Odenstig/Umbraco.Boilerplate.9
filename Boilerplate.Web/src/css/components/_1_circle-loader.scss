@@ -1,0 +1,66 @@
+/* -------------------------------- 
+
+File#: _1_circle-loader
+Title: Circle Loader
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  // v1
+  --circle-loader-v1-size: 48px;
+  --circle-loader-v1-stroke-width: 4px;
+}
+
+.circle-loader {
+  position: relative;
+  display: inline-block;
+}
+
+@supports (animation-name: this) {
+  .circle-loader__label {
+    @include srHide; // show label only to screen readers if animations are supported
+  }
+}
+
+// loader v1 - rotation
+@supports (animation-name: this) {
+  .circle-loader--v1 {
+    transform: rotate(45deg);
+    will-change: transform;
+    animation: circle-loader-1 0.75s infinite var(--ease-in-out);
+
+    .circle-loader__circle {
+      width: var(--circle-loader-v1-size); // loader width
+      height: var(--circle-loader-v1-size); // loader height
+      border-width: var(--circle-loader-v1-stroke-width); // loader stroke width
+      border-style: solid;
+      border-color: alpha(var(--color-accent-lighter), 0.2); // loader base color
+      border-radius: 50%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-width: inherit;
+        border-style: inherit;
+        border-color: transparent;
+        border-top-color: var(--color-accent); // loader fill color
+        border-radius: inherit;
+      }
+    }
+  }
+}
+
+@keyframes circle-loader-1 {
+  0% {
+    transform: rotate(45deg);
+  }
+
+  100% {
+    transform: rotate(405deg);
+  }
+}

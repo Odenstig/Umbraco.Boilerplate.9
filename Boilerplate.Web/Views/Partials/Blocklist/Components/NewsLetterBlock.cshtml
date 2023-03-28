@@ -1,0 +1,39 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Models.ViewModels
+@using Boilerplate.Core.Services;
+@using Boilerplate.Core.Services.NewsService;
+@using System.Globalization;
+@inject INewsService newsService;
+@inject ISiteService siteService;
+
+@{
+    var content = (NewsLetterBlock)Model.Content;
+    var settings = (NewsLetterBlockSettings)Model.Settings;
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.CultureName;
+    var isGoldenType = settings.BackgroundColor == "Golden";
+    var bgClass = UIService.ConditionalClass(isGoldenType, "bg-secondary color-black", "bg-accent color-white");
+}
+
+<section class="block block--news-letter z-index-1 @settings.BlockPaddingClasses()">
+    <div class="container @settings.BlockWidthClasses()">
+        <div class="grid gap-sm radius-lg padding-y-lg padding-x-md @bgClass">
+            <div class="col-12 col-6@md text-component text-center text-left@md flex flex-column justify-center">
+                @Html.Raw(content.Text)
+            </div>
+            <div class="col-12 col-6@md flex justify-center">
+                @(await Html.PartialAsync("_NewsLetterForm", new NewsLetterFormViewModel
+                {
+                    ClassNames = UIService.ConditionalClass(isGoldenType, "newsletter-form--golden", "newsletter-form--blue"),
+                    Identifier = content.Key,
+                    NamePlaceholder = siteService.Translate("NewsLetter.Name", culture),
+                    EmailPlaceholder = siteService.Translate("NewsLetter.Email", culture),
+                    ConsentText = siteService.Translate("NewsLetter.ConsentText", culture),
+                    SubmitButtonText = siteService.Translate("NewsLetter.SubmitButtonText", culture),
+                    SubmitSuccessText = siteService.Translate("NewsLetter.SubmitSuccessText", culture),
+                    SubmitErrorText = siteService.Translate("NewsLetter.SubmitErrorText", culture)
+                }))
+            </div>
+        </div>
+    </div>
+</section>

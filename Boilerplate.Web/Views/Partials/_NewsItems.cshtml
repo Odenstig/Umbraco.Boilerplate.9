@@ -1,0 +1,37 @@
+﻿@model Boilerplate.Core.Models.ViewModels.NewsItemsPartialViewModel
+
+@if (Model.HasNewsItems)
+{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.CultureName;
+    var colMdClass = UIService.ConditionalClass(Model.UseFourColumnLayout, "col-4@md", "col-3@md");
+
+    foreach (var newsItem in Model.NewsItems)
+    {
+        var imageRequest = new ImageMediaRequest
+        {
+            Image = newsItem.ValueFor(n => n.ShareImage, fallback: Fallback.ToLanguage),
+            IsLazy = Model.UseImageLazyLoad,
+            ObjectFit = ObjectFitType.Cover,
+            Crops = new ImageRequestCrops { Height = 520, Width = 800 }
+        };
+
+        <div class="col-12 col-6@sm @colMdClass">
+            <div>
+                @(await Component.InvokeAsync(typeof(ImageViewComponent), imageRequest))
+            </div>
+            <div class="text-component margin-top-xs">
+                <p class="color-contrast-medium">
+                    @newsItem.DisplayDate.ToPrettyDateString(culture)
+                </p>
+                <h4>
+                    <a class="text-decoration-none color-black" href="@newsItem.Url()">
+                        @newsItem.Name
+                    </a>
+                </h4>
+                <p>
+                    @newsItem.ValueFor(n => n.MetaDescription, fallback: Fallback.ToLanguage).Truncate(170)
+                </p>
+            </div>
+        </div>
+    }
+}

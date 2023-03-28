@@ -1,0 +1,31 @@
+﻿@using Boilerplate.Core.Components.Common.Hero
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Boilerplate.Core.Models.ViewModels.NewsPageViewModel>
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@if (Model.DisplayDatePassed)
+{
+    @(await Component.InvokeAsync(typeof(HeroViewComponent), Model))
+
+    <article class="news-content line-height-xl margin-y-xl">
+        <div class="container max-width-sm">
+            <h5 class="color-primary text-md font-medium">
+                @Model.FormattedDisplayDate
+            </h5>
+        </div>
+        @Html.GetBlockListHtml(Model.ValueFor(m => m.Blocklist, fallback: Fallback.ToLanguage))
+    </article>
+}
+
+else
+{
+    <div class="container max-width-sm">
+        <article class="text-component line-height-xl margin-md">
+            <h2>
+                @Model.PlaceholderText
+            </h2>
+        </article>
+    </div>
+}

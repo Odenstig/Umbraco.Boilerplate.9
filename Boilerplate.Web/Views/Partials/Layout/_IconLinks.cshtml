@@ -1,0 +1,21 @@
+﻿@using Boilerplate.Core.Models.ViewModels
+@model IEnumerable<Boilerplate.Core.Models.DataModels.IconMenuItem>
+
+@if (Model.Any())
+{
+    <ul class="f-header__list f-header__icon-list justify-end@md order-2 order-3@md">
+        @foreach (var iconLink in Model)
+        {
+            <li class="f-header__item">
+                <a class="f-header__link flex items-end gap-xs" href="@iconLink.Url" title="@iconLink.Name">
+                    <span class="font-semibold text-sm text-base@md">@iconLink.Name</span>
+                    @(await Html.PartialAsync("~/Views/Partials/_Icon.cshtml", new IconViewModel 
+                    {
+                        IconName = iconLink.IconName,
+                        IconClasses = "icon--sm"
+                    }))
+                </a>
+            </li>
+        }
+    </ul>
+}

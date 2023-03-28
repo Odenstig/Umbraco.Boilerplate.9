@@ -1,0 +1,47 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Boilerplate.Core.Models.GeneratedModels;
+
+@{
+    var content = (SelectedPagesBlock)Model.Content;
+    var settings = (BlockSimpleSettings)Model.Settings;
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.CultureName;
+    var hasPages = content.Pages != null && content.Pages.Any();
+}
+
+<section class="block block--selected-pages position-relative z-index-1 @settings.BlockPaddingClasses()">
+    <div class="container @settings.BlockWidthClasses()">
+        @if (hasPages)
+        {
+            <h3 class="margin-bottom-lg margin-bottom-md@md">@content.Header</h3>
+            <div class="grid gap-md gap-lg@sm gap-sm@md">
+
+                @foreach (var selectedPage in content.Pages)
+                {
+                    var imageRequest = new ImageMediaRequest
+                    {
+                        Image = selectedPage.Value<IPublishedContent>("shareImage", fallback: Fallback.ToLanguage),
+                        IsLazy = true,
+                        ObjectFit = ObjectFitType.Cover,
+                        Crops = new ImageRequestCrops { Height = 520, Width = 800 }
+                    };
+                    <a class="col-12 col-6@sm col-4@md text-decoration-none color-black" href="@selectedPage.Url()">
+                        <div>
+                            @(await Component.InvokeAsync(typeof(ImageViewComponent), imageRequest))
+                        </div>
+                        <div class="text-component margin-top-xs">
+                            <p class="color-contrast-medium text-sm font-bold">
+                                @selectedPage.CreateDate.ToPrettyDateString(culture)
+                            </p>
+                            <h4>
+                                @selectedPage.Name
+                            </h4>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+

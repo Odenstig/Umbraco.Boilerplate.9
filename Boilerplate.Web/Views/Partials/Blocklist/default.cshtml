@@ -1,0 +1,30 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListModel>
+@{
+    if (!Model.Any()) { return; }
+}
+<div class="umb-block-list">
+
+    @foreach (var block in Model)
+    {
+        if (block?.ContentUdi == null) { continue; }
+        var data = block.Content;
+
+        try
+        {
+            @await Html.PartialAsync("BlockList/Components/" + data.ContentType.Alias, block)
+        }
+
+        catch (Exception e)
+        {
+            <div class="bg-error-lighter text-component">
+                <div class="container padding-md text-center">
+                    <h4>Block list error :(</h4>
+                    <p>Failed to render @data.ContentType.Alias block</p>
+                    <p class="dev-error-message hide">
+                        @e.Message
+                    </p>
+                </div>
+            </div>
+        }
+    }
+</div>

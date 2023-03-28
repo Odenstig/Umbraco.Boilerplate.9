@@ -1,0 +1,56 @@
+﻿@using Boilerplate.Core.Components.Common.LanguagePicker
+@model Boilerplate.Core.Components.Layout.Header.HeaderViewModel
+
+<header class="f-header position-relative js-f-header bg-white">
+
+    <div class="f-header__mobile-content container max-width-lg">
+        <a href="@Model.SiteUrl" class="f-header__logo" title="@Model.SiteLinkTitle">
+            <img src="~/img/logo.png" alt="logo"/>
+        </a>
+        <button class="reset anim-menu-btn js-anim-menu-btn js-tab-focus f-header__nav-control" aria-label="Toggle menu">
+            <i class="anim-menu-btn__icon anim-menu-btn__icon--close" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="f-header__nav" role="navigation">
+        <div class="f-header__nav-grid flex gap-md gap-sm@md container max-width-lg">
+
+            <div class="f-header__nav-logo-wrapper flex-basis-0 justify-start@md order-1">
+                <a href="@Model.SiteUrl" class="f-header__logo" title="@Model.SiteLinkTitle">
+                    <img src="~/img/logo.png" alt="logo" />
+                </a>
+            </div>
+
+            @(await Html.PartialAsync("~/Views/Partials/Layout/_MainNavLinks.cshtml", Model.MainNavigation))
+            @(await Html.PartialAsync("~/Views/Partials/Layout/_TopLinksMobile.cshtml", Model.TopLinkNavigation))
+            @(await Html.PartialAsync("~/Views/Partials/Layout/_IconLinks.cshtml", Model.IconLinks))
+
+            @* Searc icon *@
+            <div class="f-header__search-desktop order-3 justify-end@md margin-left-lg@md display@md">
+                <a class="search-button" href="javascript:void(0)" title="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="0 0 24 22"><g fill="none" fill-rule="evenodd"><g stroke="#1A1A1A" stroke-width="1.4"><g><g transform="translate(-1556 -65) translate(0 -1) translate(1556 66)"><ellipse cx="10.2" cy="10.389" rx="9.5" ry="9.689" /><path stroke-linecap="round" d="M18.429 17.519L24 22" /></g></g></g></g></svg>
+                </a>
+            </div>
+
+            @* Search form *@
+            <div class="search-input search-input--icon-right hide@md order-3">
+                <input class="f-header__form-control search-input__input form-control padding-xxs@md" type="search" name="search-input" id="search-input" placeholder="Sök">
+                <button class="btn btn--icon search-input__btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <title>Search</title>
+                        <g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10">
+                            <line x1="22" y1="22" x2="15.656" y2="15.656"></line>
+                            <circle cx="10" cy="10" r="8"></circle>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="hide@md order-3">
+                @(await Component.InvokeAsync(typeof(LanguagePickerViewComponent), Model.CurrentPageId))
+            </div>
+
+        </div>
+    </div>
+
+</header>

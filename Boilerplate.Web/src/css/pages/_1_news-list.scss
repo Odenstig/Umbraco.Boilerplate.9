@@ -1,0 +1,20 @@
+﻿.news-list__load-more {
+
+    .news-list__load-more-loader {
+        display: none;
+    }
+
+    &.news-list__load-more--loading {
+        .news-list__load-more-btn {
+            display: none;
+        }
+
+        .news-list__load-more-loader {
+            display: flex;
+        }
+    }
+
+    &.news-list__load-more--hide {
+        display: none;
+    }
+}

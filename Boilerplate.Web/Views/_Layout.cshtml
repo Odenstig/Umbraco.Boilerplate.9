@@ -1,0 +1,50 @@
+﻿@using Boilerplate.Core.Components.Layout.MetaTags
+@using Boilerplate.Core.Components.Layout.PreHeader
+@using Boilerplate.Core.Components.Layout.Header
+@using Boilerplate.Core.Components.Layout.Footer
+@using Boilerplate.Core.Components.Layout.PageScripts
+@using Boilerplate.Core.Components.Common.Hero
+@using Boilerplate.Core.Models.ViewModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Boilerplate.Core.Models.GeneratedModels.ILayout>
+
+@{
+    var viewModel = new LayoutViewModel(Model);
+    var headerClass = UIService.ConditionalClass(viewModel.UseFloatingHeader, "position-absolute", "position-sticky");
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>document.getElementsByTagName("html")[0].className += " js";</script>
+    @(await Component.InvokeAsync(typeof(MetaTagsViewComponent), Model))
+    @(await Html.PartialAsync("_Stylesheets"))
+    @(await Html.PartialAsync("_Favicons"))
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" data-current-node="@Model.Id">
+
+    <div class="@headerClass width-100% z-index-header">
+
+        @(await Component.InvokeAsync(typeof(PreHeaderViewComponent), new PreHeaderRequest 
+        { 
+            CurrentPage = Model, 
+            Floating = viewModel.UseFloatingHeader 
+        }))
+
+        @(await Component.InvokeAsync(typeof(HeaderViewComponent), new HeaderRequest 
+        { 
+            CurrentPage = Model, 
+            MainNavMaxLevel = 1 
+        }))
+
+    </div>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    @(await Component.InvokeAsync(typeof(FooterViewComponent), Model))
+    @(await Component.InvokeAsync(typeof(PageScriptsViewComponent), Model))
+
+</body>
+</html>

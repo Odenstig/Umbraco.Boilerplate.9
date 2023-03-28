@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+
+@{
+    var content = (OverlappingTextAndImageBlock)Model.Content;
+    var settings = (BlockSimpleSettings)Model.Settings;
+}
+
+<section class="block block--overlapping-text-and-image position-relative z-index-1 @settings.BlockPaddingClasses()">
+    <div class="container position-relative @settings.BlockWidthClasses()">
+        <div class="grid justify-end padding-x-md padding-x-0@md">
+            <div class="position-relative z-index-2 col-7@md col-6@lg">
+                <div class="text-component bg-accent color-white padding-md padding-lg@md inner-glow shadow-sm margin-y-xxl">
+                    @Html.Raw(content.Text)
+                </div>
+            </div>
+
+            <figure class="position-absolute z-index-1 top-0 left-0 height-100% width-100% col-10@md">
+                @(await Component.InvokeAsync(typeof(ImageViewComponent), new ImageMediaRequest {
+                        Image = content.Image,
+                        IsLazy = true,
+                        Crops = new ImageRequestCrops { Width = 744, Height = 503 },
+                        ObjectFit = ObjectFitType.Cover
+                    }))
+            </figure>
+        </div>
+    </div>
+</section>

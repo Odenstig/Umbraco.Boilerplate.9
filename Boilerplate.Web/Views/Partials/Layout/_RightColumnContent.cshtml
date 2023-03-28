@@ -1,0 +1,54 @@
+﻿@*@using Boilerplate.Core.Models.DataModels
+@using Boilerplate.Core.Models.ViewModels
+@using Boilerplate.Core.Classes
+@model UmbracoViewPage<Boilerplate.Core.Models.GeneratedModels.ILayout>
+@{
+    var hej = Model;
+    var viewModel = new LeftNavigationViewModel(Model);
+    var hide = string.Empty;
+    if (viewModel.Hide)
+    {
+        hide = "hide";
+    }
+}
+
+<section id="l-sidebar" class="@hide margin-y-lg col-2">
+    <div class="bg" style="width: 250px; height: 100vh;">
+        <nav class="sidenav text-sm@md js-sidenav">
+
+            <ul class="sidenav__list">
+                @foreach (var page in viewModel.Items)
+                {
+                    var children = page.Children.FilterInvalidPages();
+                    <li class="sidenav__item">
+                        <a href="@page.Url()" class="sidenav__link">
+                            <span class="sidenav__text">@page.Name</span>
+                        </a>
+
+                        @if (children.Any())
+                        {
+                            <button class="reset sidenav__sublist-control js-sidenav__sublist-control js-tab-focus" aria-label="Toggle sub navigation">
+                                <svg class="icon" viewBox="0 0 12 12"><polygon points="4 3 8 6 4 9 4 3" /></svg>
+                            </button>
+
+                            <ul class="sidenav__list">
+                                @foreach (var child in children)
+                                {
+                                    <li class="sidenav__item">
+                                        <a href="@child.Url()" class="sidenav__link">
+                                            <span class="sidenav__text">@child.Name</span>
+                                        </a>
+                                    </li>
+
+                                }
+                            </ul>
+                        }
+
+
+                    </li>
+                }
+
+            </ul>
+        </nav>
+    </div>
+</section>*@

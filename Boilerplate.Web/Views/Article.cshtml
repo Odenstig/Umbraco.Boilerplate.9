@@ -1,0 +1,12 @@
+﻿@using Boilerplate.Core.Components.Common.Hero
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Boilerplate.Core.Models.GeneratedModels.Article>
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@(await Component.InvokeAsync(typeof(HeroViewComponent), Model))
+
+<article>
+    @Html.GetBlockListHtml(Model.ValueFor(m => m.Blocklist, fallback: Fallback.ToLanguage))
+</article>

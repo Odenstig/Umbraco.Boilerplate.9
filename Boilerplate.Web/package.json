@@ -1,0 +1,49 @@
+{
+  "name": "umbraco9.boilerplate",
+  "version": "1.0.0",
+  "browser": true,
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.13.15",
+    "@mr-hope/gulp-sass": "^2.0.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^18.1.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-multi-entry": "^4.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/stream": "^2.0.0",
+    "@types/node": "^15.0.2",
+    "autoprefixer": "^10.2.5",
+    "browser-sync": "^2.26.14",
+    "gulp": "4.0.2",
+    "gulp-cssmin": "0.2.0",
+    "gulp-postcss": "^9.0.0",
+    "gulp-purgecss": "^4.0.3",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass-glob": "^1.1.0",
+    "gulp-terser": "^2.0.1",
+    "postcss-calc": "^8.0.0",
+    "postcss-css-variables": "git+https://github.com/CodyHouse/postcss-css-variables",
+    "rimraf": "3.0.2",
+    "rollup": "^2.47.0",
+    "rollup-plugin-multi-input": "^1.2.0",
+    "sass": "^1.32.12",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chart.js": "^3.1.0",
+    "chartjs-plugin-datalabels": "^2.0.0-rc.1",
+    "codyhouse-framework": "^3.0.1",
+    "js-cookie": "^2.2.1",
+    "purgecss-from-html": "^4.0.3",
+    "query-string": "^7.0.0"
+  },
+  "scripts": {
+    "start": "gulp watch",
+    "start:ie": "gulp watch-ie",
+    "dist": "gulp dist",
+    "build": "gulp release"
+  }
+}

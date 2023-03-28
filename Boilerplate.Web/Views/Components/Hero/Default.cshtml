@@ -1,0 +1,23 @@
+﻿@using Boilerplate.Core.Models.UtilityModels
+@using Boilerplate.Core.Services
+@model Boilerplate.Core.Components.Common.Hero.HeroViewModel
+
+@if (Model.HasImage)
+{
+    <section class="hero">
+        <div class="container max-width-adaptive-lg hero__inner">
+            <div class="max-width-xs">
+                <div class="text-component margin-bottom-sm @UIService.ConditionalClass(Model.IsLightHeroText, "hero--light", "hero--dark")">
+                    @Html.Raw(Model.HeroText)
+                </div>
+            </div>
+        </div>
+        <picture class="hero__img-wrapper">
+            <source media="(max-width: 500px)" srcset="@Model.MobileCropUrl" type="image/jpeg">
+            <source media="(max-width: 800px)" srcset="@Model.TabletCropUrl" type="image/jpeg">
+            <source media="(max-width: 1200px)" srcset="@Model.DesktopCropUrl" type="image/jpeg">
+            <source srcset="@Model.DefaultCropUrl" type="image/jpeg">
+            <img class="hero__img" src="@Model.DefaultCropUrl" alt="hero" loading="lazy">
+        </picture>
+    </section>
+}

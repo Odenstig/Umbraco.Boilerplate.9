@@ -1,0 +1,107 @@
+/* -------------------------------- 
+
+File#: _1_hero
+Title: Hero
+Descr: A full-width callout section
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+// --overlay-layer
+.hero--overlay-layer {
+  &::after { // add a layer in between the img/video background and the content
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: alpha(var(--color-bg), 0.65);
+    z-index: 1;
+  }
+}
+
+.hero {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    min-height: 360px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: .8em;
+
+    @media screen and (min-width: 768px) {
+        min-height: 450px;
+        font-size: 1em;
+    }
+
+    @media screen and (min-width: 1024px) {
+        max-height: 80vh;
+        height: 592px;
+    }
+}
+
+.hero__inner {
+    position: relative;
+    z-index: 2;
+}
+
+.hero--light {
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+        color: var(--color-white);
+    }
+}
+
+.hero__img-wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    img, video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+    @media (prefers-reduced-motion: reduce) { // don't play video if Reduced Motion is enabled - show fallback image
+        video {
+            visibility: hidden;
+        }
+
+        img {
+            display: block;
+        }
+    }
+}
+
+.hero-boxed__overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 75%;
+    background: rgb(34,54,73);
+    background: linear-gradient(283deg, rgba(34,54,73,1) 0%, rgba(102,110,117,1) 32%, rgba(113,21,15,1) 100%);
+    z-index: -1;
+}
+
+.hero-boxed__text:after {
+    content: "";
+    display: block;
+    background-color: var(--color-primary);
+    margin: var(--space-md) 0;
+    height: 5px;
+    width: 47px;
+}

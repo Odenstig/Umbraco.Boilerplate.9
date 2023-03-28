@@ -1,0 +1,18 @@
+﻿@using Microsoft.Extensions.Options;
+@using Umbraco.Cms.Core.Configuration.Models;
+@using Microsoft.AspNetCore.Hosting;
+@using Boilerplate.Core.Components.Common.Hero
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Boilerplate.Core.Models.GeneratedModels.Home>
+@inject IWebHostEnvironment _env
+@inject IOptions<HostingSettings> hosting
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+
+}
+
+@(await Component.InvokeAsync(typeof(HeroViewComponent), Model))
+
+<article>
+    @Html.GetBlockListHtml(Model.ValueFor(m => m.Blocklist, fallback: Fallback.ToLanguage))
+</article>

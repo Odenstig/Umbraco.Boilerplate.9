@@ -1,0 +1,13 @@
+﻿@model Boilerplate.Core.Components.Layout.PageScripts.PageScriptsViewModel
+
+<script src="~/scripts/js/scripts.js"></script>
+
+@if (!string.IsNullOrEmpty(Model.ScriptOnAllPages))
+{
+    @Html.Raw(Model.ScriptOnAllPages)
+}
+
+@if (!string.IsNullOrEmpty(Model.PageScript))
+{
+    @Html.Raw(Model.PageScript)
+}

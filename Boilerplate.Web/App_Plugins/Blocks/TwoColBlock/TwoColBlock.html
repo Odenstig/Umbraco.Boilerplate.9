@@ -1,0 +1,19 @@
+﻿<div class="section-view">
+    <div class="section-view__card blockelement-labelblock-editor">
+        <div class="section-view__section">
+            <div class="section-view__column flx-g1"
+                 ng-repeat="property in block.content.variants[0].tabs[0].properties"
+                 ng-style="{
+                    'flex-basis': property.alias.indexOf('main') != -1
+                        ? '66%'
+                        : property.alias.indexOf('aside') != -1
+                            ? '33%'
+                            : '50%'
+                }">
+                <umb-property property="property">
+                    <umb-property-editor model="property"></umb-property-editor>
+                </umb-property>
+            </div>
+        </div>
+    </div>
+</div>

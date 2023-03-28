@@ -1,0 +1,32 @@
+﻿@model Boilerplate.Core.Components.Common.Image.ImageViewModel
+@using Boilerplate.Core.Services
+
+@if (Model.HasImage)
+{
+    var imageClasses = UIService.ClassesIf(
+        new ConditionalCssClass { Condition = Model.HasObjectFit, ClassName = $"image--{Model.ObjectFit}" },
+        new ConditionalCssClass { Condition = Model.HasClassNames, ClassName = Model.ClassNames });
+
+    if (Model.IsLazy)
+    {
+        <picture loading="lazy">
+            <source data-srcset="@Model.JpegUrl" 
+                    type="image/jpeg" />
+            <img class="image @imageClasses" 
+                 data-src="@Model.JpegUrl" 
+                 alt="@Model.AltText"
+                 loading="lazy" />
+        </picture>
+    }
+
+    else
+    {
+        <picture>
+            <source srcset="@Model.JpegUrl" 
+                    type="image/jpeg" />
+            <img class="image @imageClasses" 
+                 src="@Model.JpegUrl" 
+                 alt="@Model.AltText" />
+        </picture>
+    }
+}

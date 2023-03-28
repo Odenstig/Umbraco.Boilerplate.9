@@ -1,0 +1,33 @@
+﻿@using Boilerplate.Core.Models.UtilityModels
+@model IEnumerable<Boilerplate.Core.Models.DataModels.MenuItem>
+
+@if (Model.Any())
+{
+    <ul class="f-header__list f-header__top-links flex-grow flex-basis-0 justify-center@md hide@md order-3">
+
+        @foreach (var topLink in Model)
+        {
+            <li class="f-header__item" data-id="@topLink.Id">
+                <a href="@topLink.Url" class="f-header__link text-sm" itemprop="url" title="@topLink.Name">
+                    <span itemprop="name" class="nav-name">@topLink.Name</span>
+                </a>
+
+                @if (topLink.HasChildren)
+                {
+                    <ul class="f-header__dropdown">
+                        @foreach (var child in topLink.Children)
+                        {
+                            <li>
+                                <a href="@child.Url" class="f-header__dropdown-link text-sm">
+                                    @child.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+
+    </ul>
+
+}

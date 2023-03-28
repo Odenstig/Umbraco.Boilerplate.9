@@ -1,0 +1,52 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+@using Boilerplate.Core.Models.ViewModels;
+
+@{
+    var content = (FeaturesBlock)Model.Content;
+    var settings = (BlockGeneralSettings)Model.Settings;
+    var backgroundColor = settings?.BackgroundColor;
+    var backgroundStyle = !string.IsNullOrEmpty(backgroundColor) ? "#" + backgroundColor : "initial";
+    var backgroundClass = !string.IsNullOrEmpty(backgroundColor) ? "block--background" : "block--transparent";
+}
+
+<section class="block block--features position-relative z-index-1 @settings.BlockPaddingClasses() @backgroundClass"
+         style="background-color: @backgroundStyle">
+
+    <div class="container @settings.BlockWidthClasses()">
+
+        <div class="text-component text-center margin-bottom-md">
+            <h2>@content.Title</h2>
+            <p>@content.Text</p>
+        </div>
+
+        <div class="grid gap-sm flex flex-wrap justify-center margin-bottom-md">
+
+            @foreach (var item in content.Features)
+            {
+                var feature = (Feature)item.Content;
+
+                <div class="col-12 col-6@sm col-4@md">
+                    <div class="flex flex-column items-center text-center text-component padding-md">
+                        @(await Html.PartialAsync("~/Views/Partials/_Icon.cshtml", new IconViewModel
+                        {
+                            IconName = feature.Icon,
+                            IconClasses = "icon--xl"
+                        }))
+                        <h4>@feature.Title</h4>
+                        <p>@feature.Text</p>
+                    </div>
+                </div>
+            }
+        </div>
+        @if (content.Link != null)
+        {
+            <div class="text-center">
+                <a class="btn btn--primary" href="@content.Link.Url" target="@content.Link.Target">
+                    @content.Link.Name
+                </a>
+            </div>
+        }
+    </div>
+</section>

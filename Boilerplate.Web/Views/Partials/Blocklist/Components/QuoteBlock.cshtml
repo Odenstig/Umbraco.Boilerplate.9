@@ -1,0 +1,34 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+
+@{
+    var content = (QuoteBlock)Model.Content;
+    var settings = (QuoteSettings)Model.Settings;
+    var backgroundColor = settings?.BackgroundColor;
+    var backgroundStyle = !string.IsNullOrEmpty(backgroundColor) ? "#" + backgroundColor : "initial";
+    var backgroundClass = !string.IsNullOrEmpty(backgroundColor) ? "block--background" : "block--transparent";
+}
+
+<section class="block block--quote z-index-1 position-relative z-index-1  color-white @settings.BlockPaddingClasses() @backgroundClass"
+         style="background-color: @backgroundStyle">
+    <div class="container padding-y-lg line-height-md @settings.BlockWidthClasses()">
+        <div class="margin-bottom-lg" style="@UIService.BlockTextColor(settings.MainColor)">
+            <div class="flex justify-center margin-bottom-md">
+                <svg class="icon icon--xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 45" style="@UIService.BlockTextColor(settings.IconColor)">
+                    <path fill="currentColor" d="M38.963 45c-.893 0-1.729-.18-2.419-.65-.717-.485-1.562-1.482-1.528-3.465.05-2.744 2.284-3.958 3.918-4.846l.519-.287c2.14-1.203 3.773-2.3 5.14-3.452 2.725-2.298 4.019-4.321 3.871-4.838-.002 0-.081-.09-.371-.191-.416-.143-.938-.183-1.489-.225-.456-.035-.906-.07-1.338-.154C38.934 25.693 35 20.982 35 14.59 35 6.546 41.506 0 49.5 0 57.631 0 64 6.408 64 14.59c0 9.563-4.838 22.777-18.47 28.53l-.33.143C43.64 43.926 41.13 45 38.963 45zM49.5 2.651c-6.543 0-11.865 5.356-11.865 11.939 0 5.186 2.959 8.72 8.118 9.696.337.06.693.087 1.049.114.661.053 1.41.108 2.145.363 1.578.543 2 1.62 2.108 2.216.463 2.506-2.79 5.685-4.772 7.352-1.497 1.262-3.26 2.447-5.544 3.733l-.553.305c-1.568.849-2.52 1.448-2.538 2.561-.01.637.11 1.05.366 1.22.78.535 2.854.08 6.153-1.331l.342-.146c12.443-5.25 16.856-17.331 16.856-26.083 0-6.695-5.212-11.939-11.865-11.939zM3.966 45c-.894 0-1.732-.18-2.42-.65-.716-.485-1.564-1.482-1.53-3.465.047-2.746 2.287-3.96 3.923-4.849l.517-.284c2.14-1.203 3.773-2.3 5.138-3.452 2.727-2.296 4.02-4.318 3.873-4.838-.003 0-.082-.09-.371-.191-.417-.143-.938-.183-1.492-.225a11.9 11.9 0 0 1-1.338-.154C3.93 25.693 0 20.982 0 14.59 0 6.546 6.506 0 14.5 0 22.631 0 29 6.408 29 14.59c0 9.563-4.838 22.774-18.47 28.53l-.33.143C8.64 43.926 6.134 45 3.966 45zM14.5 2.651c-6.543 0-11.865 5.356-11.865 11.939 0 5.186 2.959 8.72 8.118 9.696.34.06.696.087 1.051.114.662.053 1.413.108 2.148.363 1.578.543 1.997 1.622 2.108 2.216.464 2.508-2.793 5.687-4.775 7.355-1.494 1.257-3.256 2.442-5.543 3.73l-.551.303c-1.565.85-2.52 1.45-2.54 2.563-.01.637.11 1.05.366 1.22 1.165.8 4.92-.806 6.147-1.331l.343-.146c12.445-5.252 16.858-17.331 16.858-26.083 0-6.695-5.212-11.939-11.865-11.939z" />
+                </svg>
+            </div>
+            <blockquote class="text-md text-lg@md text-center line-height-lg">
+                @content.Quote
+            </blockquote>
+        </div>
+
+        <div class="text-center">
+            <p class="text-sm text-md@md" style="@UIService.BlockTextColor(settings.SourceColor)">
+                @content.Source
+            </p>
+        </div>
+    </div>
+</section>
+

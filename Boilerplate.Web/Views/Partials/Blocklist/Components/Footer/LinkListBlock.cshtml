@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Umbraco.Cms.Core.Models;
+
+@{
+    var content = (LinkListBlock)Model.Content;
+}
+
+<nav>
+    <h4 class="text-md text-lg@md margin-bottom-md">
+        @content.Title
+    </h4>
+    <ul class="grid gap-sm">
+        @foreach (var link in content.LinkList)
+        {
+            <li>
+                <a class="main-footer__link" href="@link.Url" target="@link.Target">
+                    @link.Name
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

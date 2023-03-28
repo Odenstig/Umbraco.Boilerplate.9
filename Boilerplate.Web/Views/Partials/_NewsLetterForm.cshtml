@@ -1,0 +1,43 @@
+﻿@model Boilerplate.Core.Models.ViewModels.NewsLetterFormViewModel
+@inject ISiteService siteService
+
+<form class="newsletter-form grid gap-md gap-sm@md js-form-validate @Model.ClassNames" novalidate method="post">
+
+    <div class="form-validate__input-wrapper js-form-validate__input-wrapper">
+        <input class="form-control width-100%" asp-for="Form.Name" placeholder="@Model.NamePlaceholder" />
+        <div role="alert" class="form-validate__error-msg bg-error-light bg-opacity-40% padding-x-xs padding-y-xxs radius-md text-xs margin-top-xxs"></div>
+    </div>
+
+    <div class="form-validate__input-wrapper js-form-validate__input-wrapper">
+        <input class="form-control width-100%" asp-for="Form.Email" placeholder="@Model.EmailPlaceholder" />
+        <div role="alert" class="form-validate__error-msg bg-error-light bg-opacity-40% padding-x-xs padding-y-xxs radius-md text-xs margin-top-xxs"></div>
+    </div>
+
+    <div class="form-validate__input-wrapper js-form-validate__input-wrapper">
+        <div class="checkbox-wrapper">
+            <input asp-for="Form.Consent" class="checkbox checkbox--white" id="checkbox-@Model.Identifier">
+            <label for="checkbox-@Model.Identifier">@Model.ConsentText</label>
+        </div>
+        <div role="alert" class="form-validate__error-msg bg-error-light bg-opacity-40% padding-x-xs padding-y-xxs radius-md text-xs margin-top-xxs"></div>
+    </div>
+
+    <button class="btn width-100%">@Model.SubmitButtonText</button>
+
+    <div class="newsletter-form__success bg-success bg-opacity-50% hide flex items-center text-sm bg-success padding-xs radius-md margin-top-xs" role="alert">
+        <svg class="icon icon--xs margin-right-xxs" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12,0A12,12,0,1,0,24,12,12.035,12.035,0,0,0,12,0ZM10,17.414,4.586,12,6,10.586l4,4,8-8L19.414,8Z"></path>
+        </svg>
+        <p class="text-sm">@Model.SubmitSuccessText</p>
+    </div>
+
+    <div class="newsletter-form__error alert--error hide flex items-center text-sm bg-error padding-xs radius-md margin-top-xs" role="alert">
+        <svg class="icon icon--xs alert__icon margin-right-xxs" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12,0C5.383,0,0,5.383,0,12s5.383,12,12,12s12-5.383,12-12S18.617,0,12,0z M13.645,5L13,14h-2l-0.608-9 H13.645z M12,20c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2c1.105,0,2,0.895,2,2C14,19.105,13.105,20,12,20z"></path>
+        </svg>
+        <p class="text-sm">@Model.SubmitErrorText</p>
+    </div>
+
+    <div class="newsletter-form__loader hide flex justify-center">
+        @await Html.PartialAsync("_CircleLoader")
+    </div>
+</form>

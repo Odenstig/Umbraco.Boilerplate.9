@@ -1,0 +1,42 @@
+﻿@model Boilerplate.Core.Components.Common.HeroBoxed.HeroBoxedViewModel
+
+@if (Model.HasImage)
+{
+    var topPaddingClass = UIService.ConditionalClass(Model.IncreasedTopSpace, "padding-top-xxxl", "padding-top-xl");
+
+    <section class="hero-boxed bg-cover bg-center bg-no-repeat position-relative padding-bottom-xxl @topPaddingClass">
+        <div class="container max-width-lg">
+            <div class="bg bg-opacity-80% grid backdrop-blur-20">
+
+                <div class="col-12 col-5@md padding-lg bg-sand flex flex-column justify-center">
+                    <div class="hero-boxed__text text-component">
+                        @Html.Raw(Model.HeroText)
+                    </div>
+
+                    @if (Model.HasLink)
+                    {
+                        <div>
+                            <a href="@Model.HeroLink.Url" class="arrow-link-static arrow-link-static--primary" target="@Model.HeroLink.Target">
+                                @Model.HeroLink.Name
+                            </a>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="col-12 col-7@md">
+                    <div class="height-100% aspect-ratio-16\:9">
+                        <picture>
+                            <source media="(max-width: 500px)" srcset="@Model.MobileCropUrl" type="image/jpeg">
+                            <source media="(max-width: 800px)" srcset="@Model.TabletCropUrl" type="image/jpeg">
+                            <source media="(max-width: 1200px)" srcset="@Model.DesktopCropUrl" type="image/jpeg">
+                            <source srcset="@Model.DefaultCropUrl" type="image/jpeg">
+                            <img class="image object-cover" src="@Model.DefaultCropUrl" alt="hero" loading="lazy">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-boxed__overlay"></div>
+    </section>
+}

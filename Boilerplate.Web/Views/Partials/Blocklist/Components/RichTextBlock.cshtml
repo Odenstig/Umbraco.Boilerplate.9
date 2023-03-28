@@ -1,0 +1,24 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+
+@{
+    var content = (RichTextBlock)Model.Content;
+    var settings = (BlockGeneralSettings)Model.Settings;
+    var backgroundColor = settings?.BackgroundColor;
+    var backgroundStyle = !string.IsNullOrEmpty(backgroundColor) ? "#" + backgroundColor : "initial";
+    var backgroundClass = !string.IsNullOrEmpty(backgroundColor) ? "block--background" : "block--transparent";
+}
+
+<section class="block block--text position-relative z-index-1 @settings.BlockPaddingClasses() @backgroundClass"
+         style="background-color: @backgroundStyle">
+
+    <div class="container @settings.BlockWidthClasses()">
+        <div class="grid gap-lg items-center">
+            <div class="text-component text-space-y-xxl">
+                @Html.Raw(content.Rte)
+            </div>
+        </div>
+    </div>
+</section>
+

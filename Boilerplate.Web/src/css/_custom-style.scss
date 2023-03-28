@@ -1,0 +1,118 @@
+﻿// --------------------------------
+
+// Custom Style - your bespoke style
+
+.locked {
+    overflow-y: hidden;
+}
+
+body {
+    scroll-behavior: smooth;
+}
+
+.rte-red {
+    color: var(--color-primary);
+
+    a {
+        color: var(--color-primary);
+    }
+}
+
+.rte-grey {
+    color: var(--color-grey-blue);
+
+    a {
+        color: var(--color-grey-blue);
+    }
+}
+
+.rte-orange {
+    color: var(--color-secondary);
+
+    a {
+        color: var(--color-secondary);
+    }
+}
+
+.rte-blue {
+    color: var(--color-accent);
+
+    a {
+        color: var(--color-accent);
+    }
+}
+
+.rte-btn--white {
+    @extend .btn;
+    @extend .btn--white;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.rte-btn--blue {
+    @extend .btn;
+    @extend .btn--primary;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.arrow-link-static {
+    background-size: 23.5px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-right: 30px;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover,
+    &:active {
+        text-decoration: underline;
+    }
+
+    &--primary {
+        color: var(--color-primary);
+        background-image: url('/img/icons/icon-arrow-right-primary.svg');
+    }
+
+    &--blue:hover,
+    &--blue:active {
+        color: inherit;
+    }
+
+    &--brown {
+        color: inherit;
+        background-image: url('~/wwwroot/img/icons/icon-arrow-right-white.svg');
+    }
+
+    &--brown:hover,
+    &--brown:active {
+        /*color: $color-au-chico;*/
+    }
+
+    &--white {
+        /*   color: $color-white;*/
+        background-image: url('~/wwwroot/img/icons/icon-arrow-right-white.svg');
+    }
+
+    &--white:hover,
+    &--white:active {
+        /*    color: $color-white;*/
+    }
+}
+
+// --------------------------------
+
+@import 'custom-style/colors';
+@import 'custom-style/spacing';
+@import 'custom-style/shared-styles';
+@import 'custom-style/typography';
+@import 'custom-style/icons';
+@import 'custom-style/buttons';
+@import 'custom-style/forms';
+@import 'custom-style/util';

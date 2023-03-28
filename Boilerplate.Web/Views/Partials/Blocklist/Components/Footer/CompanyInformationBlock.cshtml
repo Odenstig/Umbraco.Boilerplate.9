@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+
+@{
+    var content = (CompanyInformationBlock)Model.Content;
+}
+
+<section>
+    <h4 class="text-md text-lg@md margin-bottom-md">@content.Title</h4>
+
+    <div class="text-component margin-bottom-md">
+        @Html.Raw(content.Text)
+    </div>
+
+    @if (content.DisplaySocialMediaLinks)
+    {
+        @(await Component.InvokeAsync(typeof(SocialMediaLinksViewComponent), new SocialMediaLinksRequest
+        {
+            IconClasses = "icon--lg color-white",
+        }))
+    }
+
+</section>

@@ -1,0 +1,50 @@
+﻿@using Boilerplate.Core.Components.Common.LanguagePicker
+@model Boilerplate.Core.Components.Layout.PreHeader.PreHeaderViewModel
+
+@if (Model != null)
+{
+    var classes = UIService.ConditionalClass(Model.Floating, "pre-header--floating", "pre-header--normal");
+
+    <div class="pre-header @classes text-sm width-100% display@md">
+        <div class="container max-width-lg flex@md justify-end@md">
+            <ul class="flex items-stretch gap-md">
+
+                @foreach (var link in Model.TopLinks)
+                {
+                    <li class="pre-header__item flex position-relative padding-y-xxs">
+                        <a href="@link.Url" class="pre-header__link flex items-center gap-xxs">
+                            <span class="text-sm">@link.Name</span>
+
+                            @if (link.HasChildren)
+                            {
+                                <svg aria-hidden="true" width="8" height="4">
+                                    <path d="M1.334.667 4 3.334 6.667.667" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            }
+                        </a>
+
+                        @if (link.HasChildren)
+                        {
+                            <ul class="pre-header__item-dropdown">
+                                @foreach (var child in link.Children)
+                                {
+                                    <li class="pre-header__item">
+                                        <a class="pre-header__dropdown-link" href="@child.Url">
+                                            <span class="text-sm">@child.Name</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+
+                    </li>
+                }
+
+                <li class="flex position-relative padding-y-xxs">
+                    @(await Component.InvokeAsync(typeof(LanguagePickerViewComponent), Model.CurrentPageId))
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,21 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+
+@{
+    var content = (ImageBlock)Model.Content;
+    var settings = (ImageColumnBlockSettings)Model.Settings;
+    var classes = UIService.ClassesIf(new ConditionalCssClass { Condition = settings.RoundedCorners, ClassName = "radius-lg overflow-hidden" });
+}
+
+<section class="width-100%">
+    <div class="flex @classes">
+        @(await Component.InvokeAsync(typeof(ImageViewComponent), new ImageMediaRequest
+    {
+        Image = content.ImageBlock_image,
+        Quality = 70,
+        ObjectFit = ObjectFitType.Cover,
+        IsLazy = true
+    }))
+    </div>
+</section>
+

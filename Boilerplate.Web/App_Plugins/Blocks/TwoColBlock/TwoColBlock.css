@@ -1,0 +1,42 @@
+﻿.section-view .section-view__card {
+    margin: 0 0 20px;
+    padding-left: 0;
+    width: auto;
+    background-color: #fff;
+    border-style: dashed;
+}
+
+    .section-view .section-view__card:hover {
+        background-color: rgb(253, 253, 255);
+        border-style: solid;
+    }
+
+.section-view__section {
+    margin: 0 -10px;
+    padding: 20px;
+    display: flex;
+    width: 100%;
+}
+
+.section-view__column {
+    flex-grow: 1;
+    padding: 0 10px;
+}
+
+.section-view .umb-control-group .control-header {
+    float: none;
+    width: auto;
+    display: flex;
+}
+
+.section-view__column:not(:hover) .umb-control-group .control-label {
+    opacity: .25;
+}
+
+.section-view .controls {
+    margin-left: 0;
+}
+
+.section-view__column:not(:hover) .umb-block-list__create-button {
+    border-color: #e9e9eb;
+}

@@ -1,0 +1,52 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+@using Boilerplate.Core.Services.NewsService;
+@using System.Globalization;
+@inject INewsService newsService;
+@inject ISiteService siteService;
+
+@{
+    var content = (LatestNewsBlock)Model.Content;
+    var settings = (BlockSimpleSettings)Model.Settings;
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.CultureName;
+    var newsList = content.NewsList;
+    var latestNewsItem = newsService.GetLatestNewsForNewsList(newsList.Id, culture, take: 1).FirstOrDefault();
+    var newsDisplayDate = latestNewsItem.DisplayDate.ToString("dd MMM", CultureInfo.GetCultureInfo(culture)).Replace(".", "").ToUpper();
+}
+
+<section class="block block--latest-news z-index-1 @settings.BlockPaddingClasses()">
+    <div class="container @settings.BlockWidthClasses()">
+        <div class="grid gap-md">
+            <div class="col-12 col-4@md">
+                <div class="position-relative height-100% overflow-hidden">
+                    <div class="corner-badge">
+                        <span class="corner-badge__text">@newsDisplayDate</span>
+                    </div>
+                    @(await Component.InvokeAsync(typeof(ImageViewComponent), new ImageMediaRequest {
+                        Image = latestNewsItem.ShareImage,
+                        IsLazy = true,
+                        Crops = new ImageRequestCrops { Height = 259, Width = 370 },
+                        ObjectFit = ObjectFitType.Cover
+                    }))
+                </div>
+            </div>
+            <div class="col-12 col-8@md flex items-center">
+                <div class="text-component">
+                    <p class="color-grey-blue">
+                        @newsList.Name.ToUpper()
+                    </p>
+                    <h3>
+                        @latestNewsItem.Name
+                    </h3>
+                    <p>
+                        @latestNewsItem.MetaDescription
+                    </p>
+                    <a href="@latestNewsItem.Url()">
+                        @siteService.Translate(TranslationKeys.Globals_ReadMore, culture)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

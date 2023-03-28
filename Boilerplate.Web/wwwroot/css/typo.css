@@ -1,0 +1,141 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rte-red a {
+	color: #73160f;
+}
+
+
+.rte-grey a {
+	color: #666e75;
+}
+
+
+.rte-orange a {
+	color: #d9a259;
+}
+
+
+
+.rte-btn--white a {
+	color: black;
+	text-decoration: none;
+}
+
+
+
+.rte-btn--blue a {
+	color: black;
+	text-decoration: none;
+}
+
+/**umb_name:Header 1*/
+h1 {
+	font-size: 50px;
+	margin-bottom: 20px;
+}
+
+/**umb_name:Header 2*/
+h2 {
+	font-size: 31px;
+	margin-bottom: 10px;
+}
+
+/**umb_name:Header 3*/
+h3 {
+	font-size: 25px;
+	margin-bottom: 10px;
+}
+
+/**umb_name:Header 4*/
+h4 {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+/**umb_name:Preamble*/
+.preamble {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+/**umb_name:Paragraph*/
+p {
+	font-size: 16px;
+	margin-top: 0px;
+	margin-bottom: 30px;
+}
+
+/**umb_name:Small Text*/
+.text-sm {
+	font-size: 13px;
+}
+
+/**umb_name:Red text*/
+.rte-red {
+	color: #73160f;
+}
+
+/**umb_name:Grey text*/
+.rte-grey {
+	color: #666e75;
+}
+
+/**umb_name:Blue Text*/
+.rte-blue {
+	color: #223649;
+}
+
+/**umb_name:Golden text*/
+.rte-orange {
+	color: #d9a259;
+}
+
+/**umb_name:Button White*/
+.rte-btn--white {
+	padding: 3px 15px;
+	font-size: 14px;
+	background: transparent;
+	color: black;
+	border: solid 2px black;
+	border-radius: 26px;
+	font-weight: 400;
+	text-decoration: none;
+	line-height: 1.2;
+}
+
+/**umb_name:Button Blue*/
+.rte-btn--blue {
+	padding: 3px 15px;
+	font-size: 14px;
+	background: #223649;
+	color: white;
+	border-radius: 26px;
+	font-weight: 400;
+	text-decoration: none;
+	line-height: 1.2;
+}
+
+/**umb_name:Button Subtle*/
+.rte-btn--subtle {
+	padding: 3px 15px;
+	font-size: 14px;
+	background: white;
+	border-radius: 26px;
+	font-weight: 400;
+	text-decoration: none;
+	line-height: 1.2;
+	color: #223649;
+	border: 2px solid #223649;
+	font-weight: 500;
+}

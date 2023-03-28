@@ -1,0 +1,62 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+
+@{
+    var content = (TwoColBlock)Model.Content;
+    var settings = (TwoColBlockSettings)Model.Settings;
+
+    var blockRows = UIService.GetTwoBlockContentRows(content.LeftCol, content.RightCol);
+    var (leftColWidth, rightColWidth) = UIService.CalculateColumnDistribution(settings.ColumnDistirbution);
+    var colPositionClass = UIService.ClassesIf(new ConditionalCssClass
+    {
+        Condition = !settings.DisableAutoCentering,
+        ClassName = "items-center@md"
+    });
+
+    var backgroundColor = settings?.BackgroundColor;
+    var backgroundStyle = !string.IsNullOrEmpty(backgroundColor) ? "#" + backgroundColor : "initial";
+    var backgroundClass = !string.IsNullOrEmpty(backgroundColor) ? "block--background" : "block--transparent";
+}
+
+<section class="block block--two-col position-relative @settings.BlockPaddingClasses() @backgroundClass"
+         style="background-color: @backgroundStyle">
+
+    <div class="container @settings.BlockWidthClasses()">
+        <div class="grid @settings.RowGap.TwoColGap()">
+
+            @for (int i = 0; i < blockRows.Count; i++)
+            {
+                <div class="col-12">
+                    <div class="grid @settings.ColumnGap.TwoColGap() items-stretch">
+
+                        @{
+                            var leftColumn = blockRows[i].FirstOrDefault(c => c.Position == TwoColBlockPosition.Left);
+                            var rightColumn = blockRows[i].FirstOrDefault(c => c.Position == TwoColBlockPosition.Right);
+                            var reverseOnMobile = settings.ReverseRows.Any(r => int.Parse(r) == i + 1);
+                        }
+
+                        @if (leftColumn != null)
+                        {
+                            var colClasses = UIService.ConditionalClass(reverseOnMobile, "order-2", "order-1");
+
+                            <div class="@($"col-{leftColWidth}@md") flex@md order-1@md @colClasses @colPositionClass">
+                                @await Html.PartialAsync("BlockList/Components/ColumnBlocks/" + leftColumn.Block.Content.ContentType.Alias, leftColumn.Block)
+                            </div>
+                        }
+
+                        @if (rightColumn != null)
+                        {
+                            var colClasses = UIService.ConditionalClass(reverseOnMobile, "order-1", "order-2");
+
+                            <div class="@($"col-{rightColWidth}@md") flex@md order-2@md @colClasses @colPositionClass">
+                                @await Html.PartialAsync("BlockList/Components/ColumnBlocks/" + rightColumn.Block.Content.ContentType.Alias, rightColumn.Block)
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

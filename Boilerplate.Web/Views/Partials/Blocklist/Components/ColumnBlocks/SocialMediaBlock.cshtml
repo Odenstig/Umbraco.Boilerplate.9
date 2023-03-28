@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+
+@{
+    var content = (SocialMediaBlock)Model.Content;
+}
+
+<div class="radius-md height-100% bg-sand-light color-primary width-100% flex flex-column justify-center padding-y-md padding-y-sm@md padding-x-md">
+    <div class="text-component margin-bottom-sm">
+        @Html.Raw(content.Text)
+    </div>
+    @(await Component.InvokeAsync(typeof(SocialMediaLinksViewComponent), new SocialMediaLinksRequest
+    {
+        IconClasses = "icon--md color-white",
+        IconBgColor = "#73160f"
+    }))
+</div>

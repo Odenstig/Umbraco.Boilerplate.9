@@ -1,0 +1,31 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services; 
+@using System.Web;
+
+@{
+    var content = (YoutubeBlock)Model.Content;
+    var settings = (BlockGeneralSettings)Model.Settings;
+    var backgroundColor = settings?.BackgroundColor;
+    var backgroundStyle = !string.IsNullOrEmpty(backgroundColor) ? "#" + backgroundColor : "initial";
+    var backgroundClass = !string.IsNullOrEmpty(backgroundColor) ? "block--background" : "block--transparent";
+
+    Uri myUri = new Uri(content.YoutubeUrl);
+    string videoId = HttpUtility.ParseQueryString(myUri.Query).Get("v");
+    string url = "https://www.youtube.com/embed/" + videoId;
+    string img = $"https://img.youtube.com/vi/{videoId}/0.jpg";
+}
+@if (!string.IsNullOrEmpty(videoId))
+{
+    <section class="block block--youtube position-relative z-index-1 @backgroundClass" style="background-color: @backgroundStyle">
+        <div class="container @settings.BlockWidthClasses()">
+            <div class="video-wrapper">
+                <a href="javascript:void(0)" class="video" data-videoId="@videoId" style="background-image:url(@img)" title="Play Youtube video">
+                    <img class="play-img" src="~/src/img/play-button.png" />
+                </a>
+            </div>
+        </div>
+    </section>
+}
+
+

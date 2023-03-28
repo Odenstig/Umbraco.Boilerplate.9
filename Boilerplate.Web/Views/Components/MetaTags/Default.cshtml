@@ -1,0 +1,16 @@
+﻿@model Boilerplate.Core.Components.Layout.MetaTags.MetaTagsViewModel
+
+@if (Model != null)
+{
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@Model.PageTitle - Boilerplate</title>
+    <meta name="description" content="This is a decription">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="@Model.RobotsContent" />
+    <meta property="og:image" content="@Model.OgImage">
+    <meta property="og:title" content="@Model.OgTitle">
+    <meta property="og:url" content="@Model.OgUrl">
+    <meta property="og:description" content="@Model.OgDescription">
+    <meta property="og:site_name" content="@Model.OgSiteName" />
+}

@@ -1,0 +1,81 @@
+.hover\:reduce-opacity {
+    opacity: 1;
+    transition: all 0.3s ease;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.hover\:scale {
+    transition: transform 0.8s var(--ease-out-back);
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.hover\:elevate {
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+    }
+}
+
+// text styles
+.link-subtle {
+    color: var(--color-black);
+    cursor: pointer;
+    font-weight: 400;
+    text-decoration: none;
+    @include fontSmooth;
+    transition: all 0.2s ease;
+
+    &:hover {
+        color: var(--color-contrast-medium);
+        cursor: pointer;
+        text-decoration: underline;
+        transition: none;
+    }
+}
+
+.link-secondary {
+    color: var(--color-black);
+    font-weight: 400;
+    text-decoration: underline;
+
+    &:hover {
+        color: var(--color-contrast-medium);
+    }
+}
+
+.table-head {
+    color: var(--color-contrast-medium);
+    font-weight: 400;
+
+    &:hover {
+        color: var(--color-black);
+    }
+
+    &:active {
+        color: var(--color-black);
+    }
+}
+
+.link-nav {
+    color: var(--color-black);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--color-primary-lighter);
+        cursor: pointer;
+    }
+}
+
+.preamble {
+    font-family: var(--font-primary);
+    font-size: var(--text-md);
+    font-weight: 500;
+}

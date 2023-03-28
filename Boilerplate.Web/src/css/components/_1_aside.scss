@@ -1,0 +1,12 @@
+﻿.right-col {
+    flex-basis: 100%;
+    max-width: 100%;
+    margin: var(--space-lg);
+}
+
+@include breakpoint(md) {
+    .right-col {
+        flex-basis: calc( 16.66% - 0.01px - var(--gap-x, 0.75em));
+        max-width: calc( 16.66% - 0.01px - var(--gap-x, 0.75em));
+    }
+}

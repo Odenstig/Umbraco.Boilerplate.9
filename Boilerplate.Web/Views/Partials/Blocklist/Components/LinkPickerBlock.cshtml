@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Services;
+
+@{
+    var content = (LinkPickerBlock)Model.Content;
+    var settings = (BlockSimpleSettings)Model.Settings;
+}
+
+@if (content.Links.Any())
+{
+    <section class="block block--link-picker position-relative z-index-1 @settings.BlockPaddingClasses()">
+        <div class="container @settings.BlockWidthClasses()">
+            <ul class="arrow-links grid gap-md">
+                @foreach (var link in content.Links.Where(l => l != null))
+                {
+                    <li class="arrow-links__item col-6@md">
+                        <a class="arrow-links__link" href="@link.Url" target="@link.Target">
+                            <h4 class="margin-right-md margin-right-sm@md">
+                                @link.Name
+                            </h4>
+                            <svg class="arrow-links__icon icon icon--lg" viewBox="0 0 48 48">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" stroke-linejoin="round">
+                                    <line x1="37" y1="14" x2="47" y2="24" />
+                                    <line x1="47" y1="24" x2="37" y2="34" />
+                                    <line x1="47" y1="24" x2="1.5" y2="24" />
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </section>
+}

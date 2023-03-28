@@ -1,0 +1,47 @@
+﻿@model Boilerplate.Core.Components.Layout.Footer.FooterViewModel
+@using Boilerplate.Core.Components.Common.Image;
+
+<footer class="main-footer bg-sand position-relative z-index-1 padding-top-xl">
+    <div class="container max-width-lg">
+        <div class="grid gap-lg">
+            <section class="col-3@lg order-1@lg text-right@lg">
+                <a class="main-footer__logo" href="@Model.SiteUrl" title="@Model.SiteLinkTitle">
+                    <img loading="lazy"
+                         data-src="/img/logo.png"
+                         alt="logo" />
+                </a>
+            </section>
+            <section class="col-9@lg order-1@lg">
+                <ul class="grid gap-lg">
+
+                    @foreach (var section in Model.Sections)
+                    {
+                        <li class="col-12 col-6@xs col@md">
+                            @await Html.PartialAsync("BlockList/Components/Footer/" + section.Block.Content.ContentType.Alias, section.Block)
+                        </li>
+                    }
+
+                </ul>
+            </section>
+        </div>
+
+        <div class="main-footer__bottom flex flex-column padding-y-0 padding-y-xs@md margin-top-lg flex-row@md justify-between@md items-center@md">
+            <div class="order-1 order-2@md margin-bottom-lg margin-bottom-0@md">
+
+                    @if (Model.HasBottomLinks)
+                    {
+                        <ul class="flex flex-column flex-row@md flex-wrap gap-md">
+                            @foreach (var link in Model.BottomsLinks)
+                            {
+                                <li>
+                                    <a class="color-grey-blue-light link-subtle" href="@link.Url" target="@link.Target">
+                                        @link.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    }
+            </div>
+        </div>
+    </div>
+</footer>

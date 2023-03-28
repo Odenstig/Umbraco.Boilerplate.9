@@ -1,0 +1,45 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using Boilerplate.Core.Models.GeneratedModels;
+@using Boilerplate.Core.Models.ViewModels;;
+@using Boilerplate.Core.Services;
+@using Boilerplate.Core.Services.NewsService;
+@using System.Globalization;
+@inject INewsService newsService;
+
+@{
+    var content = (NewsBlock)Model.Content;
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.CultureName;
+    var settings = (BlockSimpleSettings)Model.Settings;
+    var newsItems = content.UseLatestNews ?
+        newsService.GetLatestSiteNews(culture, 3) :
+        newsService.GetNewsByIds(content.NewsItems.Select(x => x.Id).ToArray());
+}
+
+<section class="block block--news z-index-1 @settings.BlockPaddingClasses()">
+    <div class="container @settings.BlockWidthClasses()">
+        <div class="grid gap-md gap-lg@sm gap-sm@md">
+
+            @await Html.PartialAsync("_NewsItems", new NewsItemsPartialViewModel
+            {
+                NewsItems = newsItems,
+                UseFourColumnLayout = !content.IncludeSocialMediaSection
+            })
+
+            @if (content.IncludeSocialMediaSection)
+            {
+                <div class="col-12 col-6@sm col-3@md">
+                    <div class="radius-md bg-frost padding-y-md padding-y-sm@md padding-x-md">
+                        <div class="text-component margin-bottom-sm">
+                            @Html.Raw(content.SocialMediaSectionContent)
+                        </div>
+                        @(await Component.InvokeAsync(typeof(SocialMediaLinksViewComponent), new SocialMediaLinksRequest
+                        {
+                            IconClasses = "icon--md color-white",
+                            IconBgColor = "#1a1a1a"
+                        }))
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

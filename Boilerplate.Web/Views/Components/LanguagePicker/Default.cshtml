@@ -1,0 +1,21 @@
+﻿@model Boilerplate.Core.Components.Common.LanguagePicker.LanguagePickerViewModel
+
+@if (Model.AvailableCultures.Any())
+{
+    <div class="language-picker language-picker--hide-label js-language-picker" data-trigger-class="language-picker--custom js-tab-focus">
+        <form action="" class="language-picker__form">
+            <label for="language-picker-select">@Model.ScreenReaderText</label>
+            <select name="language-picker-select" id="language-picker-select">
+
+                @foreach (var culture in Model.AvailableCultures)
+                {
+                    <option lang="@culture.Iso" data-url="@culture.NavigateTo" value="@culture.Iso" selected="@culture.IsSelected">
+                        @culture.DisplayName
+                    </option>
+                }
+
+            </select>
+        </form>
+    </div>
+}
+
